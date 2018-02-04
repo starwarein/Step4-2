@@ -40,7 +40,11 @@ git clone https://github.com/starwarein/Step4-2.git
 
 重写或者修改示例程序 **Lexical_Analyzer.c** ，使其能够分析**aim.c**程序，为了简单起便，提交时不要求完全分析成功该程序，只要在原示例程序的基础上有所更改即可，当然，如果完全分析成功甚至能够分析本身（**Lexical_Analyzer.c** ），就是满分。
 
+### 系统要求
 
+Linux
+
+PS:如果实在是懒，Ubuntu可以用学长写好的[脚本](https://github.com/starFalll/Ubuntu_Init)配置环境
 
 # 4.参考资料
 
