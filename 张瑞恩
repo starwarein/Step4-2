@@ -18,7 +18,7 @@ char str[] = "include", str1[] = "char", str2[] = "int", str3[] = "float";
 #define DIGIT 1      //数字
 #define UNKNOWN 999
 
-enum { WHILE = 258, IF, ELSE, FOR, RET, INT, FLOAT, P_INT, ARR_SIZE, P_FLOAT, P_CHAR, STRCONST, CHARCONST, HEADER_NAME, INCLUDE, SYM_GETAD, ID, EQU, ERROR };
+enum { WHILE = 258, IF, ELSE, FOR, RET, INT, FLOAT, P_INT, ARR_SIZE, P_FLOAT, P_CHAR, STRCONST, CHARCONST, HEADER_NAME, INCLUDE, SYM_GETAD, ID, EQU, NON_EQU, ERROR };
 const char * keywords[] = { "while","if","else","for","return", "stdio.h", 0 };
 //指针数组，数组内每一个元素指向一个字符串
 void addChar()
@@ -59,7 +59,7 @@ void getNonBlank()//跳过空格
 int checkSymbol(char ch, char nextCh)
 {
 	switch (ch) {
-	case '(':case ')':case ';': case '-':case '{':case '}': case '#': case '<': case '>': case ',': case '*': case '!': case ':': case '?':
+	case '(':case ')':case ';': case '-':case '{':case '}': case '#': case '<': case '>': case ',': case '*': case ':': case '?':
 		addChar();
 		nextToken = ch;
 		break;
@@ -70,6 +70,15 @@ int checkSymbol(char ch, char nextCh)
 			getChar();
 			addChar();
 			nextToken = EQU;//为判等号
+		}
+		break;
+	case '!':
+		addChar();
+		nextToken = ch;
+		if ('=' == nextCh) {
+			getChar();
+			addChar();
+			nextToken = NON_EQU;
 		}
 		break;
 	case '+':
@@ -268,7 +277,6 @@ int lexer()
 					getChar();
 				return 0;
 			}
-
 			else if (next2Char == '*')
 			{
 				while (next2Char != '/')
